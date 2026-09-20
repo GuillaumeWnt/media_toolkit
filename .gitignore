@@ -1,0 +1,74 @@
+# ==========================================
+# Environnements virtuels
+# ==========================================
+.venv/
+venv/
+ENV/
+env/
+
+# ==========================================
+# Fichiers compiles et caches Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ==========================================
+# Outils de tests et analyse de code
+# ==========================================
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ==========================================
+# Secrets et configuration
+# ==========================================
+.env
+*.env
+
+# ==========================================
+# Notebooks Jupyter
+# ==========================================
+.ipynb_checkpoints/
+
+# ==========================================
+# Fichiers systeme et IDE
+# ==========================================
+.vscode/
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ==========================================
+# Flux multimédia & Données de traitement (media_toolkit)
+# ==========================================
+# Dossiers de travail
+input/*
+!input/.gitkeep
+output/*
+!output/.gitkeep
+temp/
+tmp/
+frames/
+
+# Formats multimédias lourds (au cas où placés à la racine)
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.webm
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.pdf
+
+# Logs FFmpeg
+ffmpeg2pass-*.log
+ffmpeg2pass-*.log.mbtree
+*.log
