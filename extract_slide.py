@@ -13,7 +13,7 @@ SAMPLE_INTERVAL_SEC: float = 1.0
 
 # Pourcentage minimal de surface modifiée pour valider une nouvelle slide
 # Ex: 0.015 = 1.5 % de pixels différents. Diminuer si des slides manquent.
-DIFF_THRESHOLD: float = 0.015
+DIFF_THRESHOLD: float = 0.050
 
 # Tolérance d'intensité du pixel (0 à 255) pour ignorer les petits bruits
 PIXEL_DIFF_INTENSITY: int = 25
