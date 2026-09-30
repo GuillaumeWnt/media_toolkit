@@ -23,7 +23,7 @@ def make_square(image: Image.Image) -> Image.Image:
     max_dim = max(image.width, image.height)
     square_img = Image.new("RGBA", (max_dim, max_dim), (0, 0, 0, 0))
     offset = ((max_dim - image.width) // 2, (max_dim - image.height) // 2)
-    square_img.paste(image, offset)
+    square_img.paste(image, offset, mask=image)
     return square_img
 
 
