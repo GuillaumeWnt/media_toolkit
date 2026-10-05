@@ -14,18 +14,20 @@ AUDIO_QUALITY: int = 2
 
 # Dossiers d'entrée et de sortie
 INPUT_DIR: Path = Path("input")
-OUTPUT_DIR: Path = Path("output")
+OUTPUT_DIR: Path = Path("output_audio")
 # ==============================================================================
 
 VALID_VIDEO_EXTS = {".mp4", ".mkv", ".avi", ".mov", ".webm", ".m4v", ".flv"}
 
 
-def get_video_path() -> Path:
-    """Récupère la vidéo passée en argument CLI ou la première trouvée dans input/."""
+def get_videos() -> list[Path]:
+    """Récupère la vidéo passée en argument CLI ou toutes celles trouvées dans input/."""
     if len(sys.argv) > 1:
         video_arg = Path(sys.argv[1])
         if video_arg.is_file():
-            return video_arg
+            return [video_arg]
+        print(f"Erreur : Le fichier '{video_arg}' n'existe pas.")
+        sys.exit(1)
 
     if not INPUT_DIR.exists():
         INPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -34,11 +36,9 @@ def get_video_path() -> Path:
 
     if not candidates:
         print("Erreur : Aucune vidéo trouvée dans le dossier 'input/'.")
-        print("Placez une vidéo dans 'input/' ou indiquez son chemin en argument :")
-        print("  python extract_audio.py input/ma_video.mp4")
         sys.exit(1)
 
-    return candidates[0]
+    return candidates
 
 
 def build_ffmpeg_cmd(video_path: Path, audio_output: Path) -> list[str]:
@@ -63,30 +63,32 @@ def build_ffmpeg_cmd(video_path: Path, audio_output: Path) -> list[str]:
     return cmd
 
 
-def extract_audio() -> None:
-    video_path = get_video_path()
+def process_single_video(video_path: Path) -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     audio_output = OUTPUT_DIR / f"{video_path.stem}_audio.{OUTPUT_FORMAT}"
 
-    print(f"-> Vidéo source    : {video_path}")
-    print(f"-> Sortie audio    : {audio_output}")
+    print(f"-> Vidéo source    : {video_path.name}")
+    print(f"-> Sortie audio    : {audio_output.name}")
     print(f"-> Format          : {OUTPUT_FORMAT.upper()}")
-    print()
 
     cmd = build_ffmpeg_cmd(video_path, audio_output)
-    print(f"-> Commande FFmpeg : {' '.join(cmd)}")
-    print()
-
+    
     try:
-        subprocess.run(cmd, check=True)
-        print(f"\n[OK] Audio extrait avec succès : {audio_output}")
+        subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        print(f"[OK] Audio extrait avec succès.\n")
     except subprocess.CalledProcessError as e:
-        print(f"\n[ERREUR] FFmpeg a échoué (code {e.returncode}).")
-        sys.exit(e.returncode)
+        print(f"[ERREUR] FFmpeg a échoué (code {e.returncode}).\n")
     except FileNotFoundError:
-        print("\n[ERREUR] FFmpeg introuvable. Vérifiez qu'il est bien installé et dans le PATH.")
+        print("\n[ERREUR] FFmpeg introuvable dans le PATH.")
         sys.exit(1)
 
 
+def main() -> None:
+    videos = get_videos()
+    print(f"=== Traitement de {len(videos)} vidéo(s) ===\n")
+    for vid in videos:
+        process_single_video(vid)
+
+
 if __name__ == "__main__":
-    extract_audio()
+    main()

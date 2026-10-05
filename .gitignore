@@ -50,8 +50,8 @@ $RECYCLE.BIN/
 # Dossiers de travail
 input/*
 !input/.gitkeep
-output/*
-!output/.gitkeep
+output_*/*
+!output_*/.gitkeep
 temp/
 tmp/
 frames/

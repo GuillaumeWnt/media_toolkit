@@ -104,8 +104,8 @@ def main():
         "-o",
         "--output",
         type=str,
-        default="output",
-        help="Dossier de sortie (par défaut: 'output')",
+        default="output_ico",
+        help="Dossier de sortie (par défaut: 'output_ico')",
     )
     args = parser.parse_args()
 

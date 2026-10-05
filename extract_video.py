@@ -24,7 +24,7 @@ OUTPUT_FORMAT: str = "mp4"
 
 # Dossiers d'entrée et de sortie
 INPUT_DIR: Path = Path("input")
-OUTPUT_DIR: Path = Path("output")
+OUTPUT_DIR: Path = Path("output_video")
 # ==============================================================================
 
 VALID_VIDEO_EXTS = {".mp4", ".mkv", ".avi", ".mov", ".webm", ".m4v", ".flv"}

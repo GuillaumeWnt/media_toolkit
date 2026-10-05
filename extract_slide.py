@@ -20,7 +20,7 @@ PIXEL_DIFF_INTENSITY: int = 25
 
 # Dossiers d'entrée et de sortie
 INPUT_DIR: Path = Path("input")
-OUTPUT_DIR: Path = Path("output")
+OUTPUT_DIR: Path = Path("output_slides")
 # ==============================================================================
 
 

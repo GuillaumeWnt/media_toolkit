@@ -13,7 +13,7 @@ QUALITY: int = 80
 MAX_WIDTH: int | None = 1920
 
 INPUT_DIR: Path = Path("input")
-OUTPUT_DIR: Path = Path("output")
+OUTPUT_DIR: Path = Path("output_jpg")
 # ==============================================================================
 
 

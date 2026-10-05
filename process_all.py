@@ -30,7 +30,9 @@ if isinstance(sys.stderr, io.TextIOWrapper):
 # PARAMÈTRES
 # ==============================================================================
 INPUT_DIR: Path = Path("input")
-OUTPUT_DIR: Path = Path("output")
+OUT_AUDIO: Path = Path("output_audio")
+OUT_VIDEO: Path = Path("output_video")
+OUT_SLIDES: Path = Path("output_slides")
 
 # --- Audio ---
 AUDIO_FORMAT: str = "mp3"          # mp3 | aac | opus | flac | wav
@@ -54,7 +56,8 @@ VALID_VIDEO_EXTS = {".mp4", ".mkv", ".avi", ".mov", ".webm", ".m4v", ".flv"}
 # ─────────────────────────────────────────────────────────────────────────────
 
 def extract_audio(video_path: Path) -> None:
-    out = OUTPUT_DIR / f"{video_path.stem}_audio.{AUDIO_FORMAT}"
+    OUT_AUDIO.mkdir(parents=True, exist_ok=True)
+    out = OUT_AUDIO / f"{video_path.stem}_audio.{AUDIO_FORMAT}"
     print(f"  [audio] -> {out.name}")
 
     if AUDIO_FORMAT == "mp3":
@@ -80,7 +83,8 @@ def extract_audio(video_path: Path) -> None:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def extract_video(video_path: Path) -> None:
-    out = OUTPUT_DIR / f"{video_path.stem}_video.mp4"
+    OUT_VIDEO.mkdir(parents=True, exist_ok=True)
+    out = OUT_VIDEO / f"{video_path.stem}_video.mp4"
     print(f"  [video] -> {out.name}")
 
     cmd = ["ffmpeg", "-y", "-i", str(video_path), "-c:v", VIDEO_CODEC]
@@ -117,7 +121,8 @@ def _is_new_slide(
 
 
 def extract_slides(video_path: Path) -> None:
-    out = OUTPUT_DIR / f"{video_path.stem}_slides.pdf"
+    OUT_SLIDES.mkdir(parents=True, exist_ok=True)
+    out = OUT_SLIDES / f"{video_path.stem}_slides.pdf"
     print(f"  [slides] -> {out.name}")
 
     cap = cv2.VideoCapture(str(video_path))
@@ -197,10 +202,9 @@ def get_videos() -> list[Path]:
 
 def main() -> None:
     videos = get_videos()
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     print(f"{'='*60}")
-    print(f"  {len(videos)} vidéo(s) à traiter → sortie dans '{OUTPUT_DIR}/'")
+    print(f"  {len(videos)} vidéo(s) à traiter → sortie dans des dossiers spécifiques 'output_...'")
     print(f"{'='*60}\n")
 
     for i, video in enumerate(videos, 1):

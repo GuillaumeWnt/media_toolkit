@@ -120,7 +120,7 @@ def main():
     args = parser.parse_args()
 
     IN_DIR = Path("input")
-    OUT_DIR = Path("output")
+    OUT_DIR = Path("output_slides_filtered")
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     # Prendre les PDF demandés ou tout scanner dans input/
