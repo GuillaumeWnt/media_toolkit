@@ -10,12 +10,14 @@
   - Codecs inclus : prise en charge native intégrale (`libx264`, `libx265`, `libsvtav1`, `libmp3lame`, `libopus`, etc.).
   - Accélération matérielle disponible : CUDA / NVENC / NVDEC (Nvidia), D3D11VA / D3D12VA, AMF.
   - Fonctionnalités avancées intégrées : filtres de vision (`libplacebo`, `libvidstab`) et prise en charge de `libwhisper`.
+- `yt-dlp` : installé et accessible globalement dans le `PATH`. Permet de télécharger des vidéos/audios depuis YouTube et des centaines d'autres plateformes. Peut s'interfacer directement avec FFmpeg pour le post-traitement (conversion, remux, découpe, sous-titres, etc.).
 
 **Bibliothèques Python disponibles dans le `.venv` :**
 - `opencv-python-headless` (ou `opencv-python`)
 - `pillow`
 - `easyocr` (OCR / extraction et détection de texte sur images et slides)
 - `faster-whisper` (Speech-to-Text / transcription vocale locale optimisée)
+- `yt-dlp` (téléchargement de médias web — peut aussi être utilisé comme bibliothèque Python)
 - Module standard Python : `subprocess`, `pathlib`, `os`, `argparse`
 
 **Consignes pour le code généré :**
