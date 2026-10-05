@@ -18,6 +18,7 @@
 - `easyocr` (OCR / extraction et détection de texte sur images et slides)
 - `faster-whisper` (Speech-to-Text / transcription vocale locale optimisée)
 - `yt-dlp` (téléchargement de médias web — peut aussi être utilisé comme bibliothèque Python)
+- `PyMuPDF` (import `pymupdf` ou `fitz`) : pour la lecture, l'extraction d'images et la manipulation ultra-rapide de fichiers PDF.
 - Module standard Python : `subprocess`, `pathlib`, `os`, `argparse`
 
 **Consignes pour le code généré :**
@@ -26,5 +27,6 @@
 3. **Optimisation :** Tirer parti du transcodage sans réencodage (`-c copy`) quand c'est possible, ou proposer les encodeurs accélérés par GPU (`-c:v h264_nvenc`) pour les traitements lourds.
 4. **Traitement multimodal :**
    - Utiliser `faster-whisper` pour les transcriptions audio/vidéo locales (privilégier `device="cpu"` avec `compute_type="int8"` ou GPU CUDA si spécifié).
-   - Utiliser `easyocr` couplé à OpenCV pour la reconnaissance et l'indexation de texte dans les diapositives.
+   - Utiliser `easyocr` couplé à OpenCV pour la reconnaissance et l'indexation de texte.
+   - Privilégier la **Computer Vision pure (OpenCV, contours Canny, dHash)** plutôt que l'OCR pour les tâches de filtrage géométrique (détection d'UI, barres de tâches, fenêtres) afin de maximiser les performances (millisecondes vs secondes).
 5. **Style :** Scripts autonomes en ligne de commande (CLI), sans interface graphique (GUI), avec gestion d'arguments simples (`argparse`) ou variables d'entrée/sortie claires en début de script.

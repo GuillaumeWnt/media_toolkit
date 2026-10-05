@@ -1,1 +1,1 @@
-Ce projet sert de boite à outil pour combiner openCV, pillow et FFmpeg dans vscode.
+Ce projet sert de boite à outil pour manipuler des fichiers multimédias avec Python.
